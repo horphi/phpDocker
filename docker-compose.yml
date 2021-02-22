@@ -1,0 +1,22 @@
+# https://www.sitepoint.com/docker-php-development-environment/
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    container_name: nginxDev
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./app:/app
+
+#  php:
+#   image: php:fpm
+#   volumes:
+#     - ./app:/app
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app  
